@@ -14,23 +14,21 @@ class List extends React.Component {
         })
     }
 
-}
+    render() {
+        const {users} = this.state;
 
-render() {
-    const {users} = this.state;
-
-    return (
-        <div>
-            {users && users.map((user) => {
-                return (
-                    <div>
-                        {user.name}
-                        
+        return (
+            <div>
+                {users && users.map((user) => {
+                    return (
+                        <div>
+                            {user.name}
                         </div>
-                )
-            })}
-        </div>
-    )
+                    )
+                })}
+            </div>
+        )
+    }
 }
 
 export default List;

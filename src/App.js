@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div>
-   <Route path="/list" component={List} />
+        <List />
       </div>
     );
   }
