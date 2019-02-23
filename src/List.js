@@ -1,48 +1,32 @@
-
 import React from 'react';
-import { users } from './usersContainer'
-import { StyleSheet, Text, View } from 'react-native';
-
 class List extends React.Component {
     state = {
-        users: null
+        users: {
+            results: []
+        }
     }
 
-
-    componentDidMount() {
-        this.setState({
-            users: users
-        })
-    }
-
-    render() {
+    fetchUsers() {
         fetch('https://randomuser.me/api/?results=50')
-            .then(response => response.json())
+            .then(response => {
+                console.log(response.status)
+                return response.json()
+            })
             .then(data => {
-                this.setState(data);
+                this.setState({ users: data })
             })
 
-        const { users } = this.state;
+    }
+componentDidMount(){
+    this.fetchUsers()
+}
+    render() {
 
         return (
             <div>
-                {users && users.map((user) => {
-                    return (
-                        <div>
-                            {user.name}
-                        </div>
-                        <div>
-                            <View style={styles.container}>
-                                <Text>Open up App.js to start working on your app!</Text>
-                                <Text style={styles.text}>Hello JFDZL2</Text>
-                                {this.state.results.map(item => (
-                                    <View>
-                                        <Text>{item.name.first}</Text>
-                                    </View>
-                                ))}
-                            </View>
-                        </div>
-                    )
+                <h1>My users: </h1>
+                {this.state.users.results.map(user => {
+                    return <p key={`user-${user.id}`}>{user.name.first}</p>
                 })}
             </div>
         )
